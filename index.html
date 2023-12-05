@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>RANRAC: Robust Neural Scene Representations via Random Ray Consensus</title>
+
+    <meta name="description" content="A robust framework for single-shot reconstruction and photo-realistic reconstruction from occluded input perspectives." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="TODOTeaserImagehttps://lfranke.github.io/vet/img/vet_teaser_rs.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RANRAC: Robust Neural Scene Representations via Random Ray Consensus" />
+    <meta property="og:description" content="A robust framework for single-shot reconstruction and photo-realistic reconstruction from occluded input perspectives." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="https://bennobuschmann.com/ranrac" />
+    <meta name="twitter:title" content="RANRAC: Robust Neural Scene Representations via Random Ray Consensus" />
+    <meta name="twitter:description" content="A robust framework for single-shot reconstruction and photo-realistic reconstruction from occluded input perspectives." />
+    <meta name="twitter:image" content="TODOTeaserImagehttps://lfranke.github.io/vet/img/vet_teaser_smallrs.jpg" />
+
+
+<!--
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+//-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+
+    <link rel="stylesheet" href="css/dics.min.css">
+    <script src="js/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <a href="..">Back to Website</a>
+        <br><br>
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>RANRAC</b>: Robust Neural Scene Representations</br> via Random Ray Consensus</br>
+                <small>
+                    arXiv Preprint
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a style="text-decoration:none" href="https://bennobuschmann.com">
+                            Benno Buschmann
+                        </a>
+                        <br>TU Delft &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://andreeadogaru.github.io/">
+                            Andreea Dogaru
+                        </a>
+                        <br>FAU Erlangen-Nürnberg
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://graphics.tudelft.nl/~eisemann/">
+                            Elmar Eisemann
+                        </a>
+                        <br>TU Delft &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://graphics.tudelft.nl/michael-weinmann/">
+                            Michael Weinmann
+                        </a>
+                        <br>TU Delft &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://eggerbernhard.ch/">
+                            Bernhard Egger
+                        </a>
+                        <br>FAU Erlangen-Nürnberg
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="TODOhttps://arxiv.org/abs/XXXX.YYYYY">
+                            <img src="img/paperIcon.png" height="60px" alt="Paper">
+                                <h4><strong>Paper<br>(Coming soon)</strong></h4>
+                            </a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="TODOhttps://youtu.be/adH6GyqC4Jk">-->
+<!--                            <image src="img/youtube_icon.png" height="60px">-->
+<!--                                <h4><strong>Video</strong></h4>-->
+<!--                            </a>-->
+<!--                        </li>-->
+                        <li>
+                            <a href="TODOhttps://github.com/ladida">
+                            <img src="img/github.png" height="60px" alt="Code">
+                                <h4><strong>Code<br>(Coming Soon)</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="img/data_icon.png" height="60px" alt="Data">
+                                <h4><strong>Data<br>(Coming Soon)</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+<!--        <div class="row">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <video id="v0" width="100%" autoplay loop muted controls>-->
+<!--                  <source src="img/RANRAC.mp4" type="video/mp4" />-->
+<!--                </video>-->
+<!--						</div>-->
+<!--        </div>-->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+<!--                <div class="col-md-8 col-md-offset-2">-->
+                    <video id="v1" width="100%" autoplay loop muted controls>
+                        <source src="img/RANRAC.mp4" type="video/mp4" />
+                    </video>
+<!--                </div>-->
+<!--            <div class="row">-->
+<!--                <div class="text-center">-->
+<!--                    <div style="position:relative;padding-top:56.25%;">-->
+<!--                        <iframe src="TODO https://www.youtube-nocookie.com/embed/adH6GyqC4Jk" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    We introduce RANRAC, a robust reconstruction algorithm for 3D objects handling occluded and distracted images, which is a particularly challenging scenario that prior robust reconstruction methods cannot deal with. Our solution supports single-shot reconstruction by involving light-field networks, and is also applicable to photo-realistic, robust, multi-view reconstruction from real-world images based on neural radiance fields. While the algorithm imposes certain limitations on the scene representation and, thereby, the supported scene types, it reliably detects and excludes inconsistent perspectives, resulting in clean images without floating artifacts. Our solution is based on a fuzzy adaption of the random sample consensus paradigm, enabling its application to large scale models. We interpret the minimal number of samples to determine the model parameters as a tunable hyperparameter. This is applicable, as a cleaner set of samples improves reconstruction quality. Further, this procedure also handles outliers. Especially for conditioned models, it can result in the same local minimum in the latent space as would be obtained with a completely clean set. We report significant improvements for novel-view synthesis in occluded scenarios, of up to 8dB PSNR compared to the baseline.
+            </div>
+        </div>
+
+<!--        <div class="row">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <h3>-->
+<!--                    Video-->
+<!--                </h3>-->
+<!--&lt;!&ndash;                <div class="col-md-8 col-md-offset-2">&ndash;&gt;-->
+<!--                    <video id="v1" width="100%" autoplay loop muted controls>-->
+<!--                        <source src="img/RANRAC.mp4" type="video/mp4" />-->
+<!--                    </video>-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div style="position:relative;padding-top:56.25%;">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <iframe src="TODO https://www.youtube-nocookie.com/embed/adH6GyqC4Jk" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <br>-->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Pipeline
+                </h3>
+                Overview of our robust reconstruction pipeline with RANRAC applied to light field networks.
+                <br>
+                <br>
+                <img src="img/AlgorithmIllustration.svg" style="width:100%; height: 100%; overflow: visible">
+<!--                <img src="img/AlgorithmIllustration.svg" style="width:500px; height: 100%; overflow: visible">-->
+                <p class="text-justify">
+                <br>
+                    The RANRAC algorithm for LFNs samples random hypotheses by selecting a set of random samples from the given perspective (a), and inferring the latent representation of these rays using the autodecoder of a pretrained LFN (b).
+                    The obtained light field is then used to predict an image from the input perspective (c).
+                    Based on this prediction, confidence in the random hypothesis is evaluated via the Euclidean distance between the predicted ray colors and the remaining color samples of the input image. The amount of samples which are explained by each hypothesis up to some margin are used to determine the best hypothesis (d).
+                    All samples explained by the selected hypothesis are used for a final inference with the LFN to obtain the final model and latent representation (e).
+                <br>
+
+                <img src="img/RANRAC_Website_AlgIllusAnim.gif" style="width:100%; height: 100%; overflow: visible">
+
+                <p class="text-justify">
+                <br>
+                TODO Text about Nerf Evaluation two step
+                <br>
+                <img src="TODO" style="width:100%; height: 100%; overflow: visible" alt="NeRF Evaluation Illustration">
+                <br>
+            </div>
+        </div>
+        <br>
+
+<!--        <div class="row comp-margin">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <h3>-->
+<!--                    Result: Point Cloud Completion and Rendering TODO-->
+<!--                </h3>-->
+<!--                Intial point clouds are missing details, thus rendering is impacted heavily. Our pipeline produces convincing renderings through point cloud completion.-->
+<!--                <br>-->
+<!--                <div class="b-dics" style="width: 95%">-->
+<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
+<!--                    <img src="img/tree/out_debug_2_initial.jpg" alt="Initial Point Cloud" />-->
+<!--                    <img src="img/tree/out_debug_2_vet.jpg" alt="Ours" />-->
+<!--                </div>-->
+<!--                <small>(click and drag to swipe)</small>-->
+<!--                <div class="b-dics" style="width: 95%">-->
+<!--                    <img src="img/tree/init_render.jpg" alt="Initial Rendering" />-->
+<!--                    <img src="img/tree/vet_render.jpg" alt="Ours" />-->
+<!--                </div>-->
+<!--                <small>(click and drag to swipe)</small>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row comp-margin">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <h3>-->
+<!--                    Result: Dense Point Cloud Completion and Cleaning TODO-->
+<!--                </h3>-->
+<!--                Garden [Barron 2022]-->
+<!--                <video class="video" width=100% id="pointclouds" loop playsinline autoplay muted src="img/garden_init_vs_vet_low.mp4" onplay="resizeAndPlay(this)"></video>-->
+<!--                <canvas height=0 class="videoMerge" id="pointcloudsMerge"></canvas>-->
+<!--                <p class="text-justify">-->
+<!--                    The initial COLMAP reconstruction is missing fine details and has outliers through fuzzy edges. Completion via VET and cleaning via opacity optimization fixes that.-->
+<!--                </p>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--        <br>-->
+
+<!--        <div class="row comp-margin">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <div class="b-dics" style="width: 100%">-->
+<!--                    <img src="img/comp/adop_crop.jpg" alt="ADOP Rendering" />-->
+<!--                    <img src="img/comp/vet_crop.jpg" alt="Ours" />-->
+<!--                </div>-->
+<!--                <small>(click and drag to swipe)</small>-->
+<!--            </div>-->
+<!--            <br>-->
+
+<!--        </div>-->
+
+<!--        <br>-->
+<!--        <br>-->
+
+<!--        <div class="row">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <h3>-->
+<!--                    Result: Sparse Point Cloud Completion TODO-->
+<!--                </h3>-->
+<!--                COLMAPs sparse reconstruction can be efficiently completed.-->
+<!--                <video class="video" width=100% id="sparsepc" loop playsinline autoplay muted src="img/garden_sparse_complete_low.mp4" onplay="resizeAndPlay(this)"></video>-->
+<!--                <canvas height=0 class="videoMerge" id="sparsepcMerge"></canvas>-->
+<!--                <p class="text-justify">-->
+<!--                </p>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
+
+
+<!--        <div class="row comp-margin">-->
+<!--            <div class="col-md-8 col-md-offset-2">-->
+<!--                <h3>-->
+<!--                    Result: Rendering TODO-->
+<!--                </h3>-->
+<!--                <br>-->
+<!--                Playground [Knapitsch 2017]-->
+<!--                <div class="b-dics" style="width: 95%">-->
+<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
+<!--                <img src="img/tnt/pg_adop.jpg" alt="ADOP" />-->
+<!--                    <img src="img/tnt/pg_vet.jpg" alt="Ours" />-->
+<!--                    <img src="img/tnt/pg_mipnerf.jpg" alt="MipNeRF-360" />-->
+<!--                    <img src="img/tnt/pg_gt.jpg" alt="Ground Truth" />-->
+<!--                </div>-->
+<!--                <small>(click and drag to swipe)</small>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                Lighthouse [Knapitsch 2017]-->
+<!--                <div class="b-dics" style="width: 95%">-->
+<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
+<!--                <img src="img/tnt/lh_gt.jpg" alt="Ground Truth" />-->
+<!--                <img src="img/tnt/lh_mipnerf.jpg" alt="MipNeRF-360" />-->
+<!--                <img src="img/tnt/lh_vet.jpg" alt="Ours" />-->
+<!--                <img src="img/tnt/lh_adop.jpg" alt="ADOP" />-->
+<!--                </div>-->
+<!--                <small>(click and drag to swipe)</small>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <br>-->
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-12 col-md-offset-0">
+                    <textarea id="bibtex" class="form-control" readonly>TODO arXiv cite</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                TODO Acknowledge
+                <br>
+
+                <p class="text-justify">
+                    The website template was sourced from  <a href="https://lfranke.github.io/vet/">VET</a>, who adapted from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>, who borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
+                    Image sliders are from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                References
+            </h3>
+    <div class="content has-text-justified">
+        <p>TODO</p>
+<!--        <p>-->
+<!--            [Müller 2022] Müller, T., Evans, A., Schied, C. and Keller, A., 2022. "Instant neural graphics primitives with a multiresolution hash encoding." ACM Transactions on Graphics (ToG) 41.4 (2022): 1-15.-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            [Rückert 2022] Rückert, D., Franke, L., and Stamminger, M., 2022. "Adop: Approximate differentiable one-pixel point rendering." ACM Transactions on Graphics (ToG) 41.4 (2022): 1-14.-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            [Barron 2022] Barron, J., Mildenhall, B., Verbin, D., Srinivasan, P. and Hedman, P., 2022. "Mip-nerf 360: Unbounded anti-aliased neural radiance fields." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            [Knapitsch 2017] Knapitsch, A., Park, J., Zhou, Q. and Koltun, V., 2017 "Tanks and temples: Benchmarking large-scale scene reconstruction." ACM Transactions on Graphics (ToG) 36.4 (2017): 1-13.-->
+<!--        </p>-->
+      </div>
+    </div>
+
+</body>
+</html>
