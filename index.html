@@ -177,6 +177,7 @@
                 </h3>
                 <p class="text-justify">
                     We introduce RANRAC, a robust reconstruction algorithm for 3D objects handling occluded and distracted images, which is a particularly challenging scenario that prior robust reconstruction methods cannot deal with. Our solution supports single-shot reconstruction by involving light-field networks, and is also applicable to photo-realistic, robust, multi-view reconstruction from real-world images based on neural radiance fields. While the algorithm imposes certain limitations on the scene representation and, thereby, the supported scene types, it reliably detects and excludes inconsistent perspectives, resulting in clean images without floating artifacts. Our solution is based on a fuzzy adaption of the random sample consensus paradigm, enabling its application to large scale models. We interpret the minimal number of samples to determine the model parameters as a tunable hyperparameter. This is applicable, as a cleaner set of samples improves reconstruction quality. Further, this procedure also handles outliers. Especially for conditioned models, it can result in the same local minimum in the latent space as would be obtained with a completely clean set. We report significant improvements for novel-view synthesis in occluded scenarios, of up to 8dB PSNR compared to the baseline.
+                </p>
             </div>
         </div>
 
@@ -211,12 +212,13 @@
                 <br>
                 <img src="img/AlgorithmIllustration.svg" style="width:100%; height: 100%; overflow: visible">
 <!--                <img src="img/AlgorithmIllustration.svg" style="width:500px; height: 100%; overflow: visible">-->
-                <p class="text-justify">
                 <br>
+                <p class="text-justify">
                     The RANRAC algorithm for LFNs samples random hypotheses by selecting a set of random samples from the given perspective (a), and inferring the latent representation of these rays using the autodecoder of a pretrained LFN (b).
                     The obtained light field is then used to predict an image from the input perspective (c).
                     Based on this prediction, confidence in the random hypothesis is evaluated via the Euclidean distance between the predicted ray colors and the remaining color samples of the input image. The amount of samples which are explained by each hypothesis up to some margin are used to determine the best hypothesis (d).
                     All samples explained by the selected hypothesis are used for a final inference with the LFN to obtain the final model and latent representation (e).
+                </p>
                 <br>
 
                 <img src="img/RANRAC_Website_AlgIllusAnim.gif" style="width:100%; height: 100%; overflow: visible">
@@ -227,30 +229,154 @@
                 <br>
                 <img src="TODO" style="width:100%; height: 100%; overflow: visible" alt="NeRF Evaluation Illustration">
                 <br>
+                </p>
             </div>
         </div>
         <br>
 
-<!--        <div class="row comp-margin">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>-->
-<!--                    Result: Point Cloud Completion and Rendering TODO-->
-<!--                </h3>-->
-<!--                Intial point clouds are missing details, thus rendering is impacted heavily. Our pipeline produces convincing renderings through point cloud completion.-->
-<!--                <br>-->
-<!--                <div class="b-dics" style="width: 95%">-->
-<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
-<!--                    <img src="img/tree/out_debug_2_initial.jpg" alt="Initial Point Cloud" />-->
-<!--                    <img src="img/tree/out_debug_2_vet.jpg" alt="Ours" />-->
-<!--                </div>-->
-<!--                <small>(click and drag to swipe)</small>-->
-<!--                <div class="b-dics" style="width: 95%">-->
-<!--                    <img src="img/tree/init_render.jpg" alt="Initial Rendering" />-->
-<!--                    <img src="img/tree/vet_render.jpg" alt="Ours" />-->
-<!--                </div>-->
-<!--                <small>(click and drag to swipe)</small>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    RANRAC applied to Neural Radiance Fields
+                </h3>
+                RANRAC removes the artifacts caused by occlusions (left). Compared to robustNeRF, more details are preserved in the reconstruction (right).
+                <br>
+
+                <div class="col-md-6 col-md-offset-0">
+                <div class="b-dics" style="width: 100%">
+                    <img class="NerfCompGif" src="img/nerf_comp/VanillaOcc20_nofirst30_loop10ms.gif" alt="NeRF" />
+                    <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
+                </div>
+                <small>(click and drag to swipe)</small>
+                </div>
+                <div class="col-md-6 col-md-offset-0">
+                <div class="b-dics" style="width: 100%">
+                    <img class="NerfCompGif" src="img/nerf_comp/RobNeRFocc20_nofrst30_loop10ms.gif" alt="RobustNeRF (Sabour et al.)" />
+                    <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
+                </div>
+                <small>(click and drag to swipe)</small>
+                </div>
+                <br>
+                <img src="img/NerfComparisionWithHighlights.png" style="width:100%">
+                <p class="text-justify">
+                    The minor artifacts are best observable when taking a detailed look at individual frames. The inaccuracies robustNeRF shows compared to RANRAC appear mostly at concavities.
+                </p>
+            </div>
+        </div>
+        <br>
+
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    RANRAC applied to Light Field Networks
+                </h3>
+                <p class="text-justify">
+                    With the application of RANRAC to light field networks we enable reconstruction from a single occluded input perspective.
+                </p>
+
+                <table class="table" style="table-layout: fixed">
+                    <tr>
+                        <th class="text-center">Occlusion</th>
+                        <th class="text-center">Input</th>
+                        <th class="text-center">LFN</th>
+                        <th class="text-center">RANRAC (Ours)</th>
+                        <th class="text-center">Ground Truth</th>
+                        <th class="text-center">Consensus Set</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">0%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/occ0_input.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/cleanlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/cleanours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/cleangt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/occ0_mask.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">5%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/imgocc5.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_5_carlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_5_carours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_5_cargt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/maskimgocc5.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">15%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/imgocc15.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_15_carlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_15_carours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_15_cargt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/maskimgocc15.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">25%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/imgocc25.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_25_carlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_25_carours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_25_cargt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/maskimgocc25.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">35%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/imgocc35.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_35_carlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_35_carours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_35_cargt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/maskimgocc35.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">45%</td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/imgocc45.png"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_45_carlfn.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_45_carours.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/final_imageocc_45_cargt.gif"></td>
+                        <td class="text-center"><img style="width:85%" src="img/lfn_occ_streak/maskimgocc45.png"></td>
+                    </tr>
+                </table>
+
+                <p class="text-justify">
+                    RANRAC enables single-shot multi-class reconstruction from occluded input perspectives.
+                </p>
+                <br>
+                <table class="table" style="table-layout: fixed">
+                    <tr>
+                        <th class="text-center">Input</th>
+                        <th class="text-center">LFN</th>
+                        <th class="text-center">RANRAC (Ours)</th>
+                        <th class="text-center">Ground Truth</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/car.png"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/car_lfn.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/car_ours.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/car_gt.gif"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane.png"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane_lfn.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane_ours.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane_gt.gif"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/chair.png"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/chair_lfn.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/chair_ours.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/chair_gt.gif"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane2.png"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane2_lfn.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane2_ours.gif"></td>
+                        <td class="text-center"><img style="width:50%" src="img/lfn_qualli/plane2_gt.gif"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
 <!--        <div class="row comp-margin">-->
 <!--            <div class="col-md-8 col-md-offset-2">-->
 <!--                <h3>-->
@@ -265,7 +391,6 @@
 
 <!--            </div>-->
 <!--        </div>-->
-<!--        <br>-->
 
 <!--        <div class="row comp-margin">-->
 <!--            <div class="col-md-8 col-md-offset-2">-->

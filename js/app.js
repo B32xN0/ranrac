@@ -38,3 +38,14 @@ $(document).ready(function() {
     
     
 });
+
+
+
+function restartGIF(cls){
+    const gifs = document.getElementsByClassName(cls);
+    for (let gif of gifs) {
+        let src_ = gif.getAttribute('src');
+        gif.src="";
+        gif.src=src_;
+    }
+}
