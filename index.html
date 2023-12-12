@@ -114,19 +114,19 @@
                 <div class="col-md-4 col-md-offset-4 text-center">
                     <ul class="nav nav-pills nav-justified">
                         <li>
-                            <a href="TODOhttps://arxiv.org/abs/XXXX.YYYYY">
+                            <a href="TODO https://arxiv.org/abs/XXXX.YYYYY">
                             <img src="img/paperIcon.png" height="60px" alt="Paper">
                                 <h4><strong>Paper<br>(Coming soon)</strong></h4>
                             </a>
                         </li>
 <!--                        <li>-->
-<!--                            <a href="TODOhttps://youtu.be/adH6GyqC4Jk">-->
+<!--                            <a href="TODO https://youtu.be/foobar">-->
 <!--                            <image src="img/youtube_icon.png" height="60px">-->
 <!--                                <h4><strong>Video</strong></h4>-->
 <!--                            </a>-->
 <!--                        </li>-->
                         <li>
-                            <a href="TODOhttps://github.com/ladida">
+                            <a href="TODO https://github.com/ladida">
                             <img src="img/github.png" height="60px" alt="Code">
                                 <h4><strong>Code<br>(Coming Soon)</strong></h4>
                             </a>
@@ -141,32 +141,14 @@
                 </div>
         </div>
 
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <video id="v0" width="100%" autoplay loop muted controls>-->
-<!--                  <source src="img/RANRAC.mp4" type="video/mp4" />-->
-<!--                </video>-->
-<!--						</div>-->
-<!--        </div>-->
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Video
                 </h3>
-<!--                <div class="col-md-8 col-md-offset-2">-->
                     <video id="v1" width="100%" autoplay loop muted controls>
                         <source src="img/RANRAC.mp4" type="video/mp4" />
                     </video>
-<!--                </div>-->
-<!--            <div class="row">-->
-<!--                <div class="text-center">-->
-<!--                    <div style="position:relative;padding-top:56.25%;">-->
-<!--                        <iframe src="TODO https://www.youtube-nocookie.com/embed/adH6GyqC4Jk" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             </div>
         </div>
 
@@ -194,7 +176,7 @@
 <!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
 <!--&lt;!&ndash;                <div class="text-center">&ndash;&gt;-->
 <!--&lt;!&ndash;                    <div style="position:relative;padding-top:56.25%;">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <iframe src="TODO https://www.youtube-nocookie.com/embed/adH6GyqC4Jk" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <iframe src="TODO https://www.youtube-nocookie.com/embed/foobar" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>&ndash;&gt;-->
 <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
 <!--&lt;!&ndash;                </div>&ndash;&gt;-->
 <!--&lt;!&ndash;            </div>&ndash;&gt;-->
@@ -207,59 +189,29 @@
                 <h3>
                     Pipeline
                 </h3>
-                Overview of our robust reconstruction pipeline with RANRAC applied to light field networks.
+                Overview of our robust reconstruction pipeline with RANRAC applied to light field networks [Sitzmann 2021].
                 <br>
                 <br>
                 <img src="img/AlgorithmIllustration.svg" style="width:100%; height: 100%; overflow: visible">
-<!--                <img src="img/AlgorithmIllustration.svg" style="width:500px; height: 100%; overflow: visible">-->
                 <br>
-                <p class="text-justify">
+                <p class="text-justify" style="padding-top: 10px;">
                     The RANRAC algorithm for LFNs samples random hypotheses by selecting a set of random samples from the given perspective (a), and inferring the latent representation of these rays using the autodecoder of a pretrained LFN (b).
                     The obtained light field is then used to predict an image from the input perspective (c).
                     Based on this prediction, confidence in the random hypothesis is evaluated via the Euclidean distance between the predicted ray colors and the remaining color samples of the input image. The amount of samples which are explained by each hypothesis up to some margin are used to determine the best hypothesis (d).
                     All samples explained by the selected hypothesis are used for a final inference with the LFN to obtain the final model and latent representation (e).
                 </p>
-                <br>
+<!--                <br>-->
 
-                <img src="img/RANRAC_Website_AlgIllusAnim.gif" style="width:100%; height: 100%; overflow: visible">
+                <img src="img/RANRAC_Website_AlgIllusAnim.gif" style="width:100%; height: 100%; overflow: visible; padding-top: 0px;">
 
-                <p class="text-justify">
                 <br>
-                TODO Text about Nerf Evaluation two step
-                <br>
-                <img src="TODO" style="width:100%; height: 100%; overflow: visible" alt="NeRF Evaluation Illustration">
-                <br>
-                </p>
-            </div>
-        </div>
-        <br>
-
-        <div class="row comp-margin">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    RANRAC applied to Neural Radiance Fields
-                </h3>
-                RANRAC removes the artifacts caused by occlusions (left). Compared to robustNeRF, more details are preserved in the reconstruction (right).
-                <br>
-
-                <div class="col-md-6 col-md-offset-0">
-                <div class="b-dics" style="width: 100%">
-                    <img class="NerfCompGif" src="img/nerf_comp/VanillaOcc20_nofirst30_loop10ms.gif" alt="NeRF" />
-                    <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
-                </div>
-                <small>(click and drag to swipe)</small>
-                </div>
-                <div class="col-md-6 col-md-offset-0">
-                <div class="b-dics" style="width: 100%">
-                    <img class="NerfCompGif" src="img/nerf_comp/RobNeRFocc20_nofrst30_loop10ms.gif" alt="RobustNeRF (Sabour et al.)" />
-                    <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
-                </div>
-                <small>(click and drag to swipe)</small>
-                </div>
-                <br>
-                <img src="img/NerfComparisionWithHighlights.png" style="width:100%">
-                <p class="text-justify">
-                    The minor artifacts are best observable when taking a detailed look at individual frames. The inaccuracies robustNeRF shows compared to RANRAC appear mostly at concavities.
+                <p class="text-justify" style="padding-top: 10px">
+                    For the application to Neural Radiance Fields, enabling photo-realistic reconstruction from real-world data, the pipeline is adapted: The sampling takes place in image space and the evaluation becomes a two-step process.
+<!--                <br>-->
+<!--                TODO Text about Nerf Evaluation two step-->
+<!--                <br>-->
+<!--                <img src="TODO" style="width:100%; height: 100%; overflow: visible" alt="NeRF Evaluation Illustration">-->
+<!--                <br>-->
                 </p>
             </div>
         </div>
@@ -271,7 +223,7 @@
                     RANRAC applied to Light Field Networks
                 </h3>
                 <p class="text-justify">
-                    With the application of RANRAC to light field networks we enable reconstruction from a single occluded input perspective.
+                    With the application of RANRAC to light field networks [Sitzmann 2021] we enable reconstruction from a single occluded input perspective.
                 </p>
 
                 <table class="table" style="table-layout: fixed">
@@ -377,82 +329,42 @@
             </div>
         </div>
         <br>
-<!--        <div class="row comp-margin">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>-->
-<!--                    Result: Dense Point Cloud Completion and Cleaning TODO-->
-<!--                </h3>-->
-<!--                Garden [Barron 2022]-->
-<!--                <video class="video" width=100% id="pointclouds" loop playsinline autoplay muted src="img/garden_init_vs_vet_low.mp4" onplay="resizeAndPlay(this)"></video>-->
-<!--                <canvas height=0 class="videoMerge" id="pointcloudsMerge"></canvas>-->
-<!--                <p class="text-justify">-->
-<!--                    The initial COLMAP reconstruction is missing fine details and has outliers through fuzzy edges. Completion via VET and cleaning via opacity optimization fixes that.-->
-<!--                </p>-->
 
-<!--            </div>-->
-<!--        </div>-->
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    RANRAC applied to Neural Radiance Fields
+                </h3>
+                RANRAC removes the artifacts caused by occlusions (left) in NeRF reconstructions [Mildenhall 2020, Müller 2022]. Compared to robustNeRF [Sabour 2023], more details are preserved in the reconstruction (right).
+                <br>
 
-<!--        <div class="row comp-margin">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <div class="b-dics" style="width: 100%">-->
-<!--                    <img src="img/comp/adop_crop.jpg" alt="ADOP Rendering" />-->
-<!--                    <img src="img/comp/vet_crop.jpg" alt="Ours" />-->
-<!--                </div>-->
-<!--                <small>(click and drag to swipe)</small>-->
-<!--            </div>-->
-<!--            <br>-->
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-0">
+                        <div class="b-dics" style="width: 100%">
+                            <img class="NerfCompGif" src="img/nerf_comp/VanillaOcc20_nofirst30_loop10ms.gif" alt="NeRF" />
+                            <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
+                        </div>
+                        <small>(click and drag to swipe)</small>
+                    </div>
+                    <div class="col-md-6 col-md-offset-0">
+                        <div class="b-dics" style="width: 100%">
+                            <img class="NerfCompGif" src="img/nerf_comp/RobNeRFocc20_nofrst30_loop10ms.gif" alt="RobustNeRF (Sabour et al.)" />
+                            <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
+                        </div>
+                        <small>(click and drag to swipe)</small>
+                    </div>
+                </div>
+                <br>
 
-<!--        </div>-->
-
-<!--        <br>-->
-<!--        <br>-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>-->
-<!--                    Result: Sparse Point Cloud Completion TODO-->
-<!--                </h3>-->
-<!--                COLMAPs sparse reconstruction can be efficiently completed.-->
-<!--                <video class="video" width=100% id="sparsepc" loop playsinline autoplay muted src="img/garden_sparse_complete_low.mp4" onplay="resizeAndPlay(this)"></video>-->
-<!--                <canvas height=0 class="videoMerge" id="sparsepcMerge"></canvas>-->
-<!--                <p class="text-justify">-->
-<!--                </p>-->
-
-<!--            </div>-->
-<!--        </div>-->
-
-
-
-<!--        <div class="row comp-margin">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>-->
-<!--                    Result: Rendering TODO-->
-<!--                </h3>-->
-<!--                <br>-->
-<!--                Playground [Knapitsch 2017]-->
-<!--                <div class="b-dics" style="width: 95%">-->
-<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
-<!--                <img src="img/tnt/pg_adop.jpg" alt="ADOP" />-->
-<!--                    <img src="img/tnt/pg_vet.jpg" alt="Ours" />-->
-<!--                    <img src="img/tnt/pg_mipnerf.jpg" alt="MipNeRF-360" />-->
-<!--                    <img src="img/tnt/pg_gt.jpg" alt="Ground Truth" />-->
-<!--                </div>-->
-<!--                <small>(click and drag to swipe)</small>-->
-<!--                <br>-->
-<!--                <br>-->
-<!--                Lighthouse [Knapitsch 2017]-->
-<!--                <div class="b-dics" style="width: 95%">-->
-<!--                &lt;!&ndash;; float: left;">//&ndash;&gt;-->
-<!--                <img src="img/tnt/lh_gt.jpg" alt="Ground Truth" />-->
-<!--                <img src="img/tnt/lh_mipnerf.jpg" alt="MipNeRF-360" />-->
-<!--                <img src="img/tnt/lh_vet.jpg" alt="Ours" />-->
-<!--                <img src="img/tnt/lh_adop.jpg" alt="ADOP" />-->
-<!--                </div>-->
-<!--                <small>(click and drag to swipe)</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <br>-->
-
+                <div style="padding-top: 10px">
+                    <img src="img/NerfComparisionWithHighlights.png" style="width:100%" />
+                    <p class="text-justify" style="margin-top: 10px">
+                       Minor artifacts are best observable when taking a detailed look at individual frames. The inaccuracies RobustNeRF shows compared to RANRAC appear mostly at concavities.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -460,7 +372,7 @@
                     Citation
                 </h3>
                 <div class="form-group col-md-12 col-md-offset-0">
-                    <textarea id="bibtex" class="form-control" readonly>TODO arXiv cite</textarea>
+                    <textarea id="bibtex" class="form-control" readonly>TODO</textarea>
                 </div>
             </div>
         </div>
@@ -470,11 +382,8 @@
                 <h3>
                     Acknowledgements
                 </h3>
-                TODO Acknowledge
-                <br>
-
                 <p class="text-justify">
-                    The website template was sourced from  <a href="https://lfranke.github.io/vet/">VET</a>, who adapted from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>, who borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
+                    The authors thank everyone involved with the project. The website template was sourced from  <a href="https://lfranke.github.io/vet/">VET</a>, who adapted from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>, who borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
                     Image sliders are from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
                 </p>
             </div>
@@ -485,21 +394,14 @@
             <h3>
                 References
             </h3>
-    <div class="content has-text-justified">
-        <p>TODO</p>
-<!--        <p>-->
-<!--            [Müller 2022] Müller, T., Evans, A., Schied, C. and Keller, A., 2022. "Instant neural graphics primitives with a multiresolution hash encoding." ACM Transactions on Graphics (ToG) 41.4 (2022): 1-15.-->
-<!--        </p>-->
-<!--        <p>-->
-<!--            [Rückert 2022] Rückert, D., Franke, L., and Stamminger, M., 2022. "Adop: Approximate differentiable one-pixel point rendering." ACM Transactions on Graphics (ToG) 41.4 (2022): 1-14.-->
-<!--        </p>-->
-<!--        <p>-->
-<!--            [Barron 2022] Barron, J., Mildenhall, B., Verbin, D., Srinivasan, P. and Hedman, P., 2022. "Mip-nerf 360: Unbounded anti-aliased neural radiance fields." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.-->
-<!--        </p>-->
-<!--        <p>-->
-<!--            [Knapitsch 2017] Knapitsch, A., Park, J., Zhou, Q. and Koltun, V., 2017 "Tanks and temples: Benchmarking large-scale scene reconstruction." ACM Transactions on Graphics (ToG) 36.4 (2017): 1-13.-->
-<!--        </p>-->
-      </div>
+            <div class="content has-text-justified">
+                <p>[Sitzmann 2021] Vincent Sitzmann, Semon Rezchikov, William T. Freeman, Joshua B. Tenenbaum, and Fredo Durand. "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering." NeurIPS (2021)</p>
+                <p>[Sabour 2023] Sara Sabour, Suhani Vora, Daniel Duckworth, Ivan Krasin, David J. Fleet, and Andrea Tagliasacchi. "RobustNeRF: Ignoring Distractors With Robust Losses." CVPR (2023)</p>
+                <p>[Mildenhall 2020] Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, and Ren Ng. "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis." ECCV (2020)</p>
+                <p>[Müller 2022] Thomas Müller, Alex Evans, Christoph Schied, and Alexander Keller. "Instant neural graphics primitives with a multiresolution hash encoding." SIGGRAPH (2022)</p>
+                <p>[Fischler 1981] Martin A Fischler and Robert C Bolles. "Random sample consensus: a paradigm for model fitting with applications to image analysis and automated cartography." Communications of the ACM, 24(6):381–395 (1981)
+            </div>
+        </div>
     </div>
 
 </body>
