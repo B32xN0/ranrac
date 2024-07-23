@@ -50,10 +50,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', domReady);
         function domReady() {
-            for (const e of document.querySelectorAll(".b-dics")) {
+            for (const e of document.querySelectorAll(".b-dics-default")) {
                 new Dics({
                     container: e,
                     textPosition: "top"
+                });
+            }
+
+            for (const e of document.querySelectorAll(".b-dics-vertical")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top",
+                    linesOrientation: 'vertical',
+                    linesColor: 'rgb(200,70,50)'
                 });
             }
         }
@@ -158,7 +167,14 @@
                     Abstract
                 </h3>
                 <p class="text-justify">
-                    We introduce RANRAC, a robust reconstruction algorithm for 3D objects handling occluded and distracted images, which is a particularly challenging scenario that prior robust reconstruction methods cannot deal with. Our solution supports single-shot reconstruction by involving light-field networks, and is also applicable to photo-realistic, robust, multi-view reconstruction from real-world images based on neural radiance fields. While the algorithm imposes certain limitations on the scene representation and, thereby, the supported scene types, it reliably detects and excludes inconsistent perspectives, resulting in clean images without floating artifacts. Our solution is based on a fuzzy adaption of the random sample consensus paradigm, enabling its application to large scale models. We interpret the minimal number of samples to determine the model parameters as a tunable hyperparameter. This is applicable, as a cleaner set of samples improves reconstruction quality. Further, this procedure also handles outliers. Especially for conditioned models, it can result in the same local minimum in the latent space as would be obtained with a completely clean set. We report significant improvements for novel-view synthesis in occluded scenarios, of up to 8dB PSNR compared to the baseline.
+                    Learning-based scene representations such as neural radiance fields or light field networks, that rely on fitting a scene model to image observations, commonly encounter challenges in the presence of inconsistencies within the images caused by occlusions, inaccurately estimated camera parameters or effects like lens flare.
+                    To address this challenge, we introduce RANdom RAy Consensus (RANRAC), an efficient approach to eliminate the effect of inconsistent data, thereby taking inspiration from classical RANSAC based outlier detection for model fitting.
+                    In contrast to the down-weighting of the effect of outliers based on robust loss formulations, our approach reliably detects and excludes inconsistent perspectives, resulting in clean images without floating artifacts.
+                    For this purpose, we formulate a fuzzy adaption of the RANSAC paradigm, enabling its application to large scale models. We interpret the minimal number of samples to determine the model parameters as a tunable hyperparameter, investigate the generation of hypotheses with data-driven models, and analyse the validation of hypotheses in noisy environments.
+                    We demonstrate the compatibility and potential of our solution for both photo-realistic robust multi-view reconstruction from real-world images based on neural radiance fields and for single-shot reconstruction based on light-field networks.
+                    In particular, the results indicate significant improvements compared to state-of-the-art robust methods for novel-view synthesis on both synthetic and captured scenes with various inconsistencies including occlusions, noisy camera pose estimates, and unfocused perspectives.
+                    The results further indicate significant improvements for single-shot reconstruction from occluded images.
+<!--                    We introduce RANRAC, a robust reconstruction algorithm for 3D objects handling occluded and distracted images, which is a particularly challenging scenario that prior robust reconstruction methods cannot deal with. Our solution supports single-shot reconstruction by involving light-field networks, and is also applicable to photo-realistic, robust, multi-view reconstruction from real-world images based on neural radiance fields. While the algorithm imposes certain limitations on the scene representation and, thereby, the supported scene types, it reliably detects and excludes inconsistent perspectives, resulting in clean images without floating artifacts. Our solution is based on a fuzzy adaption of the random sample consensus paradigm, enabling its application to large scale models. We interpret the minimal number of samples to determine the model parameters as a tunable hyperparameter. This is applicable, as a cleaner set of samples improves reconstruction quality. Further, this procedure also handles outliers. Especially for conditioned models, it can result in the same local minimum in the latent space as would be obtained with a completely clean set. We report significant improvements for novel-view synthesis in occluded scenarios, of up to 8dB PSNR compared to the baseline.-->
                 </p>
             </div>
         </div>
@@ -340,14 +356,14 @@
 
                 <div class="row">
                     <div class="col-md-6 col-md-offset-0">
-                        <div class="b-dics" style="width: 100%">
+                        <div class="b-dics b-dics-default" style="width: 100%">
                             <img class="NerfCompGif" src="img/nerf_comp/VanillaOcc20_nofirst30_loop10ms.gif" alt="NeRF" />
                             <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
                         </div>
                         <small>(click and drag to swipe)</small>
                     </div>
                     <div class="col-md-6 col-md-offset-0">
-                        <div class="b-dics" style="width: 100%">
+                        <div class="b-dics b-dics-default" style="width: 100%">
                             <img class="NerfCompGif" src="img/nerf_comp/RobNeRFocc20_nofrst30_loop10ms.gif" alt="RobustNeRF (Sabour et al.)" />
                             <img class="NerfCompGif" src="img/nerf_comp/RANSACocc20_nofirst30loop10ms_.gif" alt="RANRAC (Ours)" />
                         </div>
@@ -362,6 +378,28 @@
                        Minor artifacts are best observable when taking a detailed look at individual frames. The inaccuracies RobustNeRF shows compared to RANRAC appear mostly at concavities.
                     </p>
                 </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    General Robustness of RANRAC
+                </h3>
+                RANRAC is robust to arbitrary sources of inconsistency. Below we compare reconstructions for inconsistent camera parameters.
+                RANRAC removes the artifacts caused by the inconsistencies in NeRF reconstructions [Mildenhall 2020, Müller 2022]. Compared to robustNeRF [Sabour 2023], more details are preserved in the reconstruction.
+                For better emphasis of the details the slider shows the difference of the reconstructions compared to ground truth (more red = more difference).
+                <br>
+
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+                    <div class="b-dics b-dics-vertical" style="width: 100%">
+                        <img src="img/anim/website_camera_step2-optimize30.gif" alt="Renders" />
+                        <img src="img/anim/website_camera_diff_step2-optimize30.gif" alt="Differences" />
+                    </div>
+                    <small>(click and drag to swipe)</small>
+                </div>
+                <br>
             </div>
         </div>
         <br>
